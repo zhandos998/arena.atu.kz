@@ -73,7 +73,10 @@ services:
         volume:
           nocopy: true
     depends_on:
-      - app
+      app:
+        condition: service_started
+      phpmyadmin:
+        condition: service_started
 
   db:
     image: mysql:8.4
@@ -98,6 +101,7 @@ services:
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
+      PMA_ABSOLUTE_URI: ${PHPMYADMIN_URL:-https://arena.atu.kz/phpmyadmin/}
       UPLOAD_LIMIT: 128M
     ports:
       - "127.0.0.1:${DOCKER_PHPMYADMIN_PORT:-8123}:80"
