@@ -16,7 +16,9 @@ class DockerCodeRunner implements CodeRunner
     public function compile(string $language, string $sourceCode): CompilationResult
     {
         $configuration = $this->configuration($language);
-        $directory = storage_path('app/judge/'.Str::uuid());
+        $identifier = (string) Str::uuid();
+        $directory = $this->workspaceDirectory('workspace_path', $identifier);
+        $dockerDirectory = $this->workspaceDirectory('docker_workspace_path', $identifier);
         File::ensureDirectoryExists($directory);
         File::put($directory.'/'.$configuration['filename'], $sourceCode);
 
@@ -33,13 +35,20 @@ XML);
         }
 
         if ($configuration['compile'] === null) {
-            return new CompilationResult(true, '', $directory, $configuration['image'], $configuration['run']);
+            return new CompilationResult(
+                true,
+                '',
+                $directory,
+                $configuration['image'],
+                $configuration['run'],
+                $dockerDirectory,
+            );
         }
 
         $process = new Process([
             'docker', 'run', '--rm', '--network', 'none', '--memory', '768m', '--cpus', '1',
             '--pids-limit', '128', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges',
-            '-v', $directory.':/workspace', '-w', '/workspace',
+            '--mount', 'type=bind,source='.$dockerDirectory.',target=/workspace', '-w', '/workspace',
             $configuration['image'], ...$configuration['compile'],
         ]);
         $process->setTimeout(60)->run();
@@ -50,6 +59,7 @@ XML);
             $directory,
             $configuration['image'],
             $configuration['run'],
+            $dockerDirectory,
         );
     }
 
@@ -61,7 +71,8 @@ XML);
             '--memory', $memoryLimitMb.'m', '--memory-swap', $memoryLimitMb.'m', '--cpus', '1',
             '--pids-limit', '64', '--read-only', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges',
             '--tmpfs', '/tmp:rw,noexec,nosuid,size=64m', '--user', '65534:65534',
-            '-v', $program->directory.':/workspace:ro', '-w', '/workspace',
+            '--mount', 'type=bind,source='.($program->dockerDirectory ?? $program->directory).',target=/workspace,readonly',
+            '-w', '/workspace',
             $program->image, ...$program->runCommand,
         ]);
         $process->setInput($input);
@@ -140,5 +151,10 @@ XML);
             ],
             default => throw new InvalidArgumentException('Неподдерживаемый язык программирования.'),
         };
+    }
+
+    private function workspaceDirectory(string $configurationKey, string $identifier): string
+    {
+        return rtrim((string) config('judge.'.$configurationKey), '/\\').DIRECTORY_SEPARATOR.$identifier;
     }
 }

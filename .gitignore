@@ -6,8 +6,12 @@
 .phpactor.json
 .phpunit.result.cache
 SERVER_COMMANDS.txt
+docker.env
+/.agents/
+/.claude/
 /.codex
 /.cursor/
+/.junie/
 /.idea
 /.nova
 /.phpunit.cache
@@ -22,6 +26,7 @@ SERVER_COMMANDS.txt
 /storage/*.key
 /storage/pail
 /vendor
+/backups/
 _ide_helper.php
 Homestead.json
 Homestead.yaml

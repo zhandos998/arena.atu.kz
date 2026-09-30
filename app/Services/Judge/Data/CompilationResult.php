@@ -13,5 +13,6 @@ final readonly class CompilationResult
         public string $directory,
         public string $image,
         public array $runCommand,
+        public ?string $dockerDirectory = null,
     ) {}
 }
