@@ -64,7 +64,7 @@ services:
     image: atu-arena-nginx:latest
     restart: unless-stopped
     ports:
-      - "127.0.0.1:${DOCKER_HTTP_PORT:-8092}:80"
+      - "127.0.0.1:${DOCKER_HTTP_PORT:-8122}:80"
     volumes:
       - type: volume
         source: app_storage
@@ -100,7 +100,7 @@ services:
       PMA_PORT: 3306
       UPLOAD_LIMIT: 128M
     ports:
-      - "127.0.0.1:${DOCKER_PHPMYADMIN_PORT:-8093}:80"
+      - "127.0.0.1:${DOCKER_PHPMYADMIN_PORT:-8123}:80"
     depends_on:
       db:
         condition: service_healthy
