@@ -5,6 +5,7 @@
 .env.production
 .phpactor.json
 .phpunit.result.cache
+SERVER_COMMANDS.txt
 /.codex
 /.cursor/
 /.idea
