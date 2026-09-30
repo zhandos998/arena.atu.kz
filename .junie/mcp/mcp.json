@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "C:\\Program Files\\php\\php.exe",
+            "args": [
+                "D:\\zhandos998\\Desktop\\ATU scripts\\arena.atu.kz\\artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}

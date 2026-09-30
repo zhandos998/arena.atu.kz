@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-[#f3f6fb] text-[#142d55];
+    }
+
+    ::selection {
+        @apply bg-[#ffd83d] text-[#10264f];
+    }
+}
