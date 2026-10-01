@@ -35,6 +35,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'locale' => app()->getLocale(),
+            'timezone' => config('app.timezone'),
             'locales' => [
                 ['value' => 'kk', 'label' => 'ҚАЗ'],
                 ['value' => 'ru', 'label' => 'РУС'],

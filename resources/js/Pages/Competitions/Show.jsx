@@ -3,18 +3,19 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useTranslation } from '@/lib/i18n';
 import { Head, Link, usePage } from '@inertiajs/react';
 
-function formatDate(value, locale) {
+function formatDate(value, locale, timezone) {
     return new Intl.DateTimeFormat({ ru: 'ru-RU', kk: 'kk-KZ', en: 'en-US' }[locale], {
         day: '2-digit',
         month: 'long',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
+        timeZone: timezone,
     }).format(new Date(value));
 }
 
 export default function Show({ competition }) {
-    const { flash } = usePage().props;
+    const { flash, timezone } = usePage().props;
     const { locale } = useTranslation();
     const copy = {
         ru: { all: 'Все соревнования', registered: 'Вы зарегистрированы', participants: 'Участников', register: 'Зарегистрироваться', unregister: 'Отменить регистрацию', unavailable: 'Самостоятельная регистрация недоступна.', rules: 'Правила', problems: 'Задачи', registerHint: 'Зарегистрируйтесь, чтобы получить доступ к задачам после старта.', opens: 'Задачи откроются', empty: 'В соревновании пока нет задач.', points: 'баллов', solve: 'Решать', open: 'Открытая регистрация', closed: 'Закрытая регистрация' },
@@ -46,7 +47,7 @@ export default function Show({ competition }) {
                             </div>
                             <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">{competition.title}</h1>
                             <p className="mt-3 max-w-3xl whitespace-pre-line text-sm leading-6 text-[#d8e3f5]">{competition.description}</p>
-                            <p className="mt-5 text-xs font-bold text-[#aac0df]">{formatDate(competition.starts_at, locale)} — {formatDate(competition.ends_at, locale)}</p>
+                            <p className="mt-5 text-xs font-bold text-[#aac0df]">{formatDate(competition.starts_at, locale, timezone)} — {formatDate(competition.ends_at, locale, timezone)}</p>
                         </div>
 
                         <div className="rounded-2xl bg-white/10 p-4 backdrop-blur">
@@ -85,7 +86,7 @@ export default function Show({ competition }) {
                     {!competition.is_registered ? (
                         <div className="mt-4 rounded-2xl border border-dashed border-[#bdcbe0] dark:border-[#415a78] bg-white dark:bg-[#142238] px-6 py-10 text-center text-sm text-[#7184a0] dark:text-[#aebfd6]">{copy.registerHint}</div>
                     ) : !competition.has_started ? (
-                        <div className="mt-4 rounded-2xl border border-dashed border-[#bdcbe0] dark:border-[#415a78] bg-white dark:bg-[#142238] px-6 py-10 text-center text-sm text-[#7184a0] dark:text-[#aebfd6]">{copy.opens} {formatDate(competition.starts_at, locale)}.</div>
+                        <div className="mt-4 rounded-2xl border border-dashed border-[#bdcbe0] dark:border-[#415a78] bg-white dark:bg-[#142238] px-6 py-10 text-center text-sm text-[#7184a0] dark:text-[#aebfd6]">{copy.opens} {formatDate(competition.starts_at, locale, timezone)}.</div>
                     ) : competition.problems.length === 0 ? (
                         <div className="mt-4 rounded-2xl border border-dashed border-[#bdcbe0] dark:border-[#415a78] bg-white dark:bg-[#142238] px-6 py-10 text-center text-sm text-[#7184a0] dark:text-[#aebfd6]">{copy.empty}</div>
                     ) : (

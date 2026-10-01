@@ -2,17 +2,18 @@ import ArenaIcon from '@/Components/ArenaIcon';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, usePage } from '@inertiajs/react';
 
-function formatDate(value) {
+function formatDate(value, timezone) {
     return new Intl.DateTimeFormat('ru-RU', {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
+        timeZone: timezone,
     }).format(new Date(value));
 }
 
-function CompetitionCard({ competition }) {
+function CompetitionCard({ competition, timezone }) {
     const published = competition.status === 'published';
     const archived = competition.status === 'archived';
 
@@ -33,7 +34,7 @@ function CompetitionCard({ competition }) {
                     <div>
                         <dt className="font-semibold text-[#8795a9] dark:text-[#a4b6cf]">Период проведения</dt>
                         <dd className="mt-1 font-bold leading-5 text-[#314765] dark:text-[#d2dff1]">
-                            {formatDate(competition.starts_at)} — {formatDate(competition.ends_at)}
+                            {formatDate(competition.starts_at, timezone)} — {formatDate(competition.ends_at, timezone)}
                         </dd>
                     </div>
                 </div>
@@ -71,7 +72,7 @@ function CompetitionCard({ competition }) {
 }
 
 export default function Index({ competitions }) {
-    const { flash } = usePage().props;
+    const { flash, timezone } = usePage().props;
 
     return (
         <AdminLayout title="Соревнования" subtitle="Создание и управление турнирами">
@@ -115,7 +116,7 @@ export default function Index({ competitions }) {
                 ) : (
                     <section className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                         {competitions.data.map((competition) => (
-                            <CompetitionCard key={competition.id} competition={competition} />
+                            <CompetitionCard key={competition.id} competition={competition} timezone={timezone} />
                         ))}
                     </section>
                 )}

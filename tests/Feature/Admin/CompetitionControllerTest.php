@@ -95,6 +95,24 @@ class CompetitionControllerTest extends TestCase
         $this->assertSame(['cpp', 'python'], $competition->allowed_languages);
     }
 
+    public function test_competition_times_are_returned_in_the_atu_timezone(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $competition = Competition::factory()->for($admin, 'creator')->create([
+            'starts_at' => '2026-10-03 12:00:00',
+            'ends_at' => '2026-10-03 17:00:00',
+        ]);
+
+        $response = $this->actingAs($admin)
+            ->get(route('admin.competitions.show', $competition));
+
+        $response->assertInertia(fn (Assert $page): Assert => $page
+            ->where('timezone', 'Asia/Almaty')
+            ->where('competition.starts_at', '2026-10-03T12:00:00+05:00')
+            ->where('competition.ends_at', '2026-10-03T17:00:00+05:00')
+        );
+    }
+
     public function test_new_competition_is_always_created_as_draft(): void
     {
         $admin = User::factory()->admin()->create();

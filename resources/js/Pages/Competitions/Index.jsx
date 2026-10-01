@@ -1,19 +1,20 @@
 import ArenaIcon from '@/Components/ArenaIcon';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useTranslation } from '@/lib/i18n';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 
-function formatDate(value, locale) {
+function formatDate(value, locale, timezone) {
     return new Intl.DateTimeFormat({ ru: 'ru-RU', kk: 'kk-KZ', en: 'en-US' }[locale], {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
+        timeZone: timezone,
     }).format(new Date(value));
 }
 
-function CompetitionCard({ competition, copy, locale }) {
+function CompetitionCard({ competition, copy, locale, timezone }) {
     const now = new Date();
     const startsAt = new Date(competition.starts_at);
     const endsAt = new Date(competition.ends_at);
@@ -41,7 +42,7 @@ function CompetitionCard({ competition, copy, locale }) {
             <dl className="mt-5 grid gap-3 border-t border-[#edf1f7] dark:border-[#2d405b] pt-4 text-xs text-[#667892] dark:text-[#aebfd6]">
                 <div className="flex items-start gap-3">
                     <ArenaIcon name="calendar" className="mt-0.5 h-4 w-4 shrink-0 text-[#355da8] dark:text-[#a9c7ff]" />
-                    <span className="font-bold leading-5">{formatDate(competition.starts_at, locale)} — {formatDate(competition.ends_at, locale)}</span>
+                    <span className="font-bold leading-5">{formatDate(competition.starts_at, locale, timezone)} — {formatDate(competition.ends_at, locale, timezone)}</span>
                 </div>
                 <div className="flex items-center gap-3">
                     <ArenaIcon name="users" className="h-4 w-4 shrink-0 text-[#355da8] dark:text-[#a9c7ff]" />
@@ -68,6 +69,7 @@ function CompetitionCard({ competition, copy, locale }) {
 
 export default function Index({ competitions }) {
     const { locale } = useTranslation();
+    const { timezone } = usePage().props;
     const copy = {
         ru: { title: 'Соревнования', description: 'Выберите опубликованный турнир, зарегистрируйтесь и решайте задачи после старта.', registration: 'Регистрация', running: 'Идёт сейчас', finished: 'Завершено', participating: 'Вы участвуете', defaultDescription: 'Соревнование по программированию для студентов АТУ.', participants: 'участников', problems: 'задач', open: 'Открыть соревнование', empty: 'Нет открытых соревнований', emptyText: 'Новые турниры появятся здесь после публикации администратором.' },
         kk: { title: 'Жарыстар', description: 'Жарияланған турнирді таңдап, тіркеліңіз және басталғаннан кейін есептерді шешіңіз.', registration: 'Тіркелу', running: 'Қазір өтуде', finished: 'Аяқталды', participating: 'Сіз қатысасыз', defaultDescription: 'АТУ студенттеріне арналған бағдарламалау жарысы.', participants: 'қатысушы', problems: 'есеп', open: 'Жарысты ашу', empty: 'Ашық жарыстар жоқ', emptyText: 'Жаңа турнирлер әкімші жариялағаннан кейін осында пайда болады.' },
@@ -92,7 +94,7 @@ export default function Index({ competitions }) {
                     </div>
                 ) : (
                     <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                        {competitions.data.map((competition) => <CompetitionCard key={competition.id} competition={competition} copy={copy} locale={locale} />)}
+                        {competitions.data.map((competition) => <CompetitionCard key={competition.id} competition={competition} copy={copy} locale={locale} timezone={timezone} />)}
                     </div>
                 )}
 

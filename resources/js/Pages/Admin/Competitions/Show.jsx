@@ -2,18 +2,19 @@ import ArenaIcon from '@/Components/ArenaIcon';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
-function formatDate(value) {
+function formatDate(value, timezone) {
     return new Intl.DateTimeFormat('ru-RU', {
         day: '2-digit',
         month: 'long',
         year: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
+        timeZone: timezone,
     }).format(new Date(value));
 }
 
 export default function Show({ competition }) {
-    const { flash } = usePage().props;
+    const { flash, timezone } = usePage().props;
     const published = competition.status === 'published';
     const archived = competition.status === 'archived';
     const participantForm = useForm({ email: '' });
@@ -135,11 +136,11 @@ export default function Show({ competition }) {
                     <dl className="grid border-t border-white/10 bg-white/[0.05] sm:grid-cols-2 xl:grid-cols-4">
                         <div className="border-b border-white/10 px-6 py-4 sm:border-r xl:border-b-0">
                             <dt className="text-[10px] font-bold uppercase tracking-wider text-[#8fa8ce]">Начало</dt>
-                            <dd className="mt-1 text-xs font-bold">{formatDate(competition.starts_at)}</dd>
+                            <dd className="mt-1 text-xs font-bold">{formatDate(competition.starts_at, timezone)}</dd>
                         </div>
                         <div className="border-b border-white/10 px-6 py-4 xl:border-b-0 xl:border-r">
                             <dt className="text-[10px] font-bold uppercase tracking-wider text-[#8fa8ce]">Окончание</dt>
-                            <dd className="mt-1 text-xs font-bold">{formatDate(competition.ends_at)}</dd>
+                            <dd className="mt-1 text-xs font-bold">{formatDate(competition.ends_at, timezone)}</dd>
                         </div>
                         <div className="border-b border-white/10 px-6 py-4 sm:border-r sm:border-b-0">
                             <dt className="text-[10px] font-bold uppercase tracking-wider text-[#8fa8ce]">Регистрация</dt>
