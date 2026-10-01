@@ -184,6 +184,32 @@ class ProblemControllerTest extends TestCase
         ]);
     }
 
+    public function test_administrator_can_store_rich_problem_content(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $competition = Competition::factory()->for($admin, 'creator')->create();
+        $statement = json_encode([
+            'type' => 'doc',
+            'content' => [[
+                'type' => 'paragraph',
+                'content' => [
+                    ['type' => 'text', 'text' => 'Ограничение: 10'],
+                    ['type' => 'text', 'marks' => [['type' => 'superscript']], 'text' => '5'],
+                ],
+            ]],
+        ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+        $response = $this->actingAs($admin)->post(
+            route('admin.competitions.problems.store', $competition),
+            [...$this->validPayload(), 'statement' => $statement],
+        );
+
+        $problem = Problem::query()->sole();
+
+        $response->assertRedirect(route('admin.competitions.problems.show', [$competition, $problem]));
+        $this->assertSame($statement, $problem->statement);
+    }
+
     public function test_required_problem_fields_are_validated(): void
     {
         $admin = User::factory()->admin()->create();

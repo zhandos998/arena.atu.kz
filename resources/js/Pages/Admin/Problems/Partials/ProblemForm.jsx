@@ -1,6 +1,7 @@
 import ArenaIcon from '@/Components/ArenaIcon';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
+import RichTextEditor from '@/Components/RichTextEditor';
 import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
@@ -91,26 +92,26 @@ export default function ProblemForm({ competition, problem = null }) {
 
                             <div>
                                 <InputLabel htmlFor="statement" value="Условие" />
-                                <textarea id="statement" value={data.statement} rows="10" className={textareaClassName} placeholder="Опишите, что требуется вычислить…" onChange={(event) => setData('statement', event.target.value)} required />
+                                <RichTextEditor id="statement" value={data.statement} onChange={(value) => setData('statement', value)} allowImages />
                                 <InputError message={errors.statement} className="mt-2" />
                             </div>
 
                             <div className="grid gap-5 lg:grid-cols-2">
                                 <div>
                                     <InputLabel htmlFor="input_format" value="Формат входных данных" />
-                                    <textarea id="input_format" value={data.input_format} rows="5" className={textareaClassName} placeholder="В первой строке дано целое число k…" onChange={(event) => setData('input_format', event.target.value)} />
+                                    <RichTextEditor id="input_format" value={data.input_format} onChange={(value) => setData('input_format', value)} minHeight="150px" />
                                     <InputError message={errors.input_format} className="mt-2" />
                                 </div>
                                 <div>
                                     <InputLabel htmlFor="output_format" value="Формат выходных данных" />
-                                    <textarea id="output_format" value={data.output_format} rows="5" className={textareaClassName} placeholder="Выведите k строк…" onChange={(event) => setData('output_format', event.target.value)} />
+                                    <RichTextEditor id="output_format" value={data.output_format} onChange={(value) => setData('output_format', value)} minHeight="150px" />
                                     <InputError message={errors.output_format} className="mt-2" />
                                 </div>
                             </div>
 
                             <div>
                                 <InputLabel htmlFor="constraints" value="Ограничения" />
-                                <textarea id="constraints" value={data.constraints} rows="3" className={textareaClassName} placeholder="1 ≤ k ≤ 10000" onChange={(event) => setData('constraints', event.target.value)} />
+                                <RichTextEditor id="constraints" value={data.constraints} onChange={(value) => setData('constraints', value)} minHeight="110px" />
                                 <InputError message={errors.constraints} className="mt-2" />
                             </div>
 

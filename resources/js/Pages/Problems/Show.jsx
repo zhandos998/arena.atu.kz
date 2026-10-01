@@ -1,5 +1,6 @@
 import ArenaIcon from '@/Components/ArenaIcon';
 import InputError from '@/Components/InputError';
+import RichTextContent from '@/Components/RichTextContent';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useTranslation } from '@/lib/i18n';
 import { Head, Link, useForm, usePage, usePoll } from '@inertiajs/react';
@@ -10,7 +11,7 @@ function TextSection({ title, children }) {
     return (
         <section>
             <h2 className="text-xl font-black text-[#173563] dark:text-[#eaf1ff]">{title}</h2>
-            <div className="mt-3 whitespace-pre-wrap text-sm leading-7 text-[#405674] dark:text-[#b9cbe3]">{children}</div>
+            <RichTextContent content={children} className="mt-3" />
         </section>
     );
 }

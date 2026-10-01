@@ -20,3 +20,68 @@
         @apply bg-[#ffd83d] text-[#10264f];
     }
 }
+
+@layer components {
+    .rich-text-content {
+        @apply text-sm leading-7 text-[#405674] dark:text-[#b9cbe3];
+    }
+
+    .rich-text-content > * + * {
+        @apply mt-3;
+    }
+
+    .rich-text-content h2 {
+        @apply mt-6 text-xl font-black leading-tight text-[#173563] dark:text-[#eaf1ff];
+    }
+
+    .rich-text-content h3 {
+        @apply mt-5 text-lg font-black leading-tight text-[#253f68] dark:text-[#dbe7f8];
+    }
+
+    .rich-text-content ul {
+        @apply ml-6 list-disc;
+    }
+
+    .rich-text-content ol {
+        @apply ml-6 list-decimal;
+    }
+
+    .rich-text-content li + li {
+        @apply mt-1;
+    }
+
+    .rich-text-content blockquote {
+        @apply border-l-4 border-[#9fb8df] pl-4 italic text-[#617491] dark:border-[#516e95] dark:text-[#aebfd6];
+    }
+
+    .rich-text-content code {
+        @apply rounded bg-[#edf3ff] px-1.5 py-0.5 font-mono text-[0.9em] text-[#173563] dark:bg-[#203858] dark:text-[#dce8fa];
+    }
+
+    .rich-text-content pre {
+        @apply overflow-x-auto rounded-xl bg-[#10264f] p-4 font-mono text-xs leading-6 text-[#eaf1ff];
+    }
+
+    .rich-text-content pre code {
+        @apply bg-transparent p-0 text-inherit;
+    }
+
+    .rich-text-content a {
+        @apply font-bold text-[#355da8] underline decoration-[#9fb8df] underline-offset-2 dark:text-[#a9c7ff];
+    }
+
+    .rich-text-content img {
+        @apply mx-auto max-h-[560px] max-w-full rounded-xl object-contain shadow-sm;
+    }
+
+    .rich-text-content sup,
+    .rich-text-content sub {
+        font-size: 0.72em;
+        line-height: 0;
+    }
+
+    .rich-text-content.ProseMirror p.is-editor-empty:first-child::before {
+        @apply pointer-events-none float-left h-0 text-[#9aa8ba];
+        content: 'Введите текст…';
+    }
+}

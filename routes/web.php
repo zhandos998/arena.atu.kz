@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CompetitionController as AdminCompetitionControll
 use App\Http\Controllers\Admin\CompetitionParticipantController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProblemController as AdminProblemController;
+use App\Http\Controllers\Admin\ProblemImageController;
 use App\Http\Controllers\Admin\ProblemJudgeSettingsController;
 use App\Http\Controllers\Admin\ProblemTestCaseController;
 use App\Http\Controllers\Admin\PublishedCompetitionController;
@@ -79,6 +80,9 @@ Route::middleware(['auth', 'admin'])
             ->name('competitions.participants.destroy');
         Route::get('problems', [AdminProblemController::class, 'index'])
             ->name('problems.index');
+        Route::post('problem-images', ProblemImageController::class)
+            ->middleware('throttle:30,1')
+            ->name('problem-images.store');
         Route::get('tests', TestDashboardController::class)->name('tests.index');
         Route::get('submissions', [AdminSubmissionController::class, 'index'])->name('submissions.index');
         Route::resource('competitions.problems', AdminProblemController::class)
