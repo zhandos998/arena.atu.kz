@@ -5,7 +5,7 @@ import TextInput from '@/Components/TextInput';
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-const selectClassName = 'mt-2 block w-full rounded-xl border-[#ccd7e8] bg-white px-4 py-3 text-sm text-[#142d55] shadow-sm focus:border-[#355da8] focus:ring-[#355da8]';
+const selectClassName = 'mt-2 block w-full rounded-xl border-[#ccd7e8] dark:border-[#3a506e] bg-white dark:bg-[#142238] px-4 py-3 text-sm text-[#142d55] dark:text-[#e8eef9] shadow-sm focus:border-[#355da8] dark:focus:border-[#91b8ff] focus:ring-[#355da8] dark:focus:ring-[#91b8ff]';
 
 export default function Create({ options, competition = null }) {
     const isEditing = competition !== null;
@@ -46,19 +46,19 @@ export default function Create({ options, competition = null }) {
 
             <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
                 <div className="mb-6 flex items-center gap-2 text-sm">
-                    <Link href={route('admin.competitions.index')} className="font-bold text-[#355da8] hover:text-[#23457e]">
+                    <Link href={route('admin.competitions.index')} className="font-bold text-[#355da8] dark:text-[#a9c7ff] hover:text-[#23457e]">
                         Соревнования
                     </Link>
-                    <span className="text-[#a2adbc]">/</span>
-                    <span className="text-[#7184a0]">Создание</span>
+                    <span className="text-[#a2adbc] dark:text-[#a8b9d1]">/</span>
+                    <span className="text-[#7184a0] dark:text-[#aebfd6]">Создание</span>
                 </div>
 
                 <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
-                    <form onSubmit={submit} className="rounded-2xl border border-[#dfe7f3] bg-white p-5 shadow-sm sm:p-8">
+                    <form onSubmit={submit} className="rounded-2xl border border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238] p-5 shadow-sm sm:p-8">
                         <div>
-                            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#355da8]">Основные данные</p>
-                            <h1 className="mt-2 text-2xl font-black tracking-tight text-[#142d55]">{isEditing ? 'Изменить соревнование' : 'Создать соревнование'}</h1>
-                            <p className="mt-2 text-sm leading-6 text-[#7184a0]">{isEditing ? 'Обновите расписание, описание, правила и доступные языки.' : 'После сохранения турнир появится в списке администратора.'}</p>
+                            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#355da8] dark:text-[#a9c7ff]">Основные данные</p>
+                            <h1 className="mt-2 text-2xl font-black tracking-tight text-[#142d55] dark:text-[#e8eef9]">{isEditing ? 'Изменить соревнование' : 'Создать соревнование'}</h1>
+                            <p className="mt-2 text-sm leading-6 text-[#7184a0] dark:text-[#aebfd6]">{isEditing ? 'Обновите расписание, описание, правила и доступные языки.' : 'После сохранения турнир появится в списке администратора.'}</p>
                         </div>
 
                         <div className="mt-7 grid gap-5">
@@ -82,7 +82,7 @@ export default function Create({ options, competition = null }) {
                                     id="description"
                                     value={data.description}
                                     rows="5"
-                                    className="mt-2 block w-full rounded-xl border-[#ccd7e8] bg-white px-4 py-3 text-sm text-[#142d55] shadow-sm placeholder:text-[#9aa8ba] focus:border-[#355da8] focus:ring-[#355da8]"
+                                    className="mt-2 block w-full rounded-xl border-[#ccd7e8] dark:border-[#3a506e] bg-white dark:bg-[#142238] px-4 py-3 text-sm text-[#142d55] dark:text-[#e8eef9] shadow-sm placeholder:text-[#9aa8ba] dark:placeholder:text-[#94a9c4] focus:border-[#355da8] dark:focus:border-[#91b8ff] focus:ring-[#355da8] dark:focus:ring-[#91b8ff]"
                                     placeholder="Кратко опишите формат, правила и цель соревнования"
                                     onChange={(event) => setData('description', event.target.value)}
                                 />
@@ -95,7 +95,7 @@ export default function Create({ options, competition = null }) {
                                     id="rules"
                                     value={data.rules}
                                     rows="7"
-                                    className="mt-2 block w-full rounded-xl border-[#ccd7e8] bg-white px-4 py-3 text-sm text-[#142d55] shadow-sm placeholder:text-[#9aa8ba] focus:border-[#355da8] focus:ring-[#355da8]"
+                                    className="mt-2 block w-full rounded-xl border-[#ccd7e8] dark:border-[#3a506e] bg-white dark:bg-[#142238] px-4 py-3 text-sm text-[#142d55] dark:text-[#e8eef9] shadow-sm placeholder:text-[#9aa8ba] dark:placeholder:text-[#94a9c4] focus:border-[#355da8] dark:focus:border-[#91b8ff] focus:ring-[#355da8] dark:focus:ring-[#91b8ff]"
                                     placeholder="Опишите начисление баллов, штрафы и правила участия"
                                     onChange={(event) => setData('rules', event.target.value)}
                                 />
@@ -158,23 +158,23 @@ export default function Create({ options, competition = null }) {
                                             <option key={option.value} value={option.value}>{option.label}</option>
                                         ))}
                                     </select>
-                                    <p className="mt-2 text-xs leading-5 text-[#8795a9]">Статус меняется на странице соревнования после добавления задач.</p>
+                                    <p className="mt-2 text-xs leading-5 text-[#8795a9] dark:text-[#a4b6cf]">Статус меняется на странице соревнования после добавления задач.</p>
                                     <InputError message={errors.status} className="mt-2" />
                                 </div>
                             </div>
 
                             <fieldset>
-                                <legend className="text-sm font-semibold text-[#314765]">Языки программирования</legend>
+                                <legend className="text-sm font-semibold text-[#314765] dark:text-[#d2dff1]">Языки программирования</legend>
                                 <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                                     {options.languages.map((language) => (
                                         <label
                                             key={language.value}
-                                            className={`flex cursor-pointer items-center gap-3 rounded-xl border p-3 text-sm font-bold transition ${data.allowed_languages.includes(language.value) ? 'border-[#8eabda] bg-[#edf3ff] text-[#234d8f]' : 'border-[#dfe7f3] bg-white text-[#667892] hover:border-[#b8c9e4]'}`}
+                                            className={`flex cursor-pointer items-center gap-3 rounded-xl border p-3 text-sm font-bold transition ${data.allowed_languages.includes(language.value) ? 'border-[#8eabda] dark:border-[#6c93ca] bg-[#edf3ff] dark:bg-[#203858] text-[#234d8f] dark:text-[#a9c7ff]' : 'border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238] text-[#667892] dark:text-[#aebfd6] hover:border-[#b8c9e4] dark:hover:border-[#516e95]'}`}
                                         >
                                             <input
                                                 type="checkbox"
                                                 checked={data.allowed_languages.includes(language.value)}
-                                                className="rounded border-[#b8c9e4] text-[#355da8] focus:ring-[#355da8]"
+                                                className="rounded border-[#b8c9e4] dark:border-[#516e95] text-[#355da8] dark:text-[#a9c7ff] focus:ring-[#355da8] dark:focus:ring-[#91b8ff]"
                                                 onChange={() => toggleLanguage(language.value)}
                                             />
                                             {language.label}
@@ -185,10 +185,10 @@ export default function Create({ options, competition = null }) {
                             </fieldset>
                         </div>
 
-                        <div className="mt-8 flex flex-col-reverse gap-3 border-t border-[#edf1f7] pt-6 sm:flex-row sm:justify-end">
+                        <div className="mt-8 flex flex-col-reverse gap-3 border-t border-[#edf1f7] dark:border-[#2d405b] pt-6 sm:flex-row sm:justify-end">
                             <Link
                                 href={isEditing ? route('admin.competitions.show', competition.id) : route('admin.competitions.index')}
-                                className="inline-flex items-center justify-center rounded-xl border border-[#ccd7e8] px-5 py-3 text-sm font-bold text-[#667892] transition hover:bg-[#f3f6fb]"
+                                className="inline-flex items-center justify-center rounded-xl border border-[#ccd7e8] dark:border-[#3a506e] px-5 py-3 text-sm font-bold text-[#667892] dark:text-[#aebfd6] transition hover:bg-[#f3f6fb] dark:hover:bg-[#0c1628]"
                             >
                                 Отмена
                             </Link>

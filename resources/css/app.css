@@ -8,7 +8,12 @@
     }
 
     body {
-        @apply bg-[#f3f6fb] text-[#142d55];
+        @apply bg-[#f3f6fb] text-[#142d55] dark:bg-[#0c1628] dark:text-[#e8eef9];
+    }
+
+    html.dark :is(input:not([type='checkbox']):not([type='radio']), select, textarea):not([class*='bg-']) {
+        background-color: #142238;
+        color: #e8eef9;
     }
 
     ::selection {

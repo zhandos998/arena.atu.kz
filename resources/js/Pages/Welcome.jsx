@@ -1,6 +1,7 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import ArenaIcon from '@/Components/ArenaIcon';
 import LocaleSwitcher from '@/Components/LocaleSwitcher';
+import ThemeToggle from '@/Components/ThemeToggle';
 import { useTranslation } from '@/lib/i18n';
 import { Head, Link } from '@inertiajs/react';
 
@@ -20,7 +21,7 @@ const formats = [
     {
         icon: 'clock',
         step: '02',
-        title: 'Один тур — 4 часа',
+        title: 'Решайте в своём темпе',
         text: 'Решайте задачи в любом порядке, отправляйте решения и сразу получайте результат автоматической проверки.',
     },
     {
@@ -33,9 +34,9 @@ const formats = [
 
 const timeline = [
     ['Регистрация', 'Создайте аккаунт участника и заполните профиль.'],
-    ['Пробный тур', 'Проверьте среду, формат отправки и доступ к системе.'],
+    ['Подготовка', 'Проверьте среду, формат отправки и доступ к системе.'],
     ['Основной раунд', 'Решайте задачи и поднимайтесь в рейтинге.'],
-    ['Награждение', 'Лучшие участники получат дипломы и призы АТУ.'],
+    ['Итоги', 'Посмотрите свои результаты и положение в рейтинге.'],
 ];
 
 function Brand({ light = false }) {
@@ -43,7 +44,7 @@ function Brand({ light = false }) {
         <div className="flex min-w-0 items-center gap-3">
             <span
                 className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
-                    light ? 'bg-white' : 'bg-[#edf3ff]'
+                    light ? 'bg-white' : 'bg-[#edf3ff] dark:bg-white'
                 }`}
             >
                 <ApplicationLogo variant="compact" className="h-8 w-8" />
@@ -51,14 +52,14 @@ function Brand({ light = false }) {
             <div className="min-w-0">
                 <p
                     className={`hidden truncate text-[10px] font-bold uppercase tracking-[0.22em] sm:block ${
-                        light ? 'text-white/60' : 'text-[#6b7f9e]'
+                        light ? 'text-white/60' : 'text-[#6b7f9e] dark:text-[#aebfd6]'
                     }`}
                 >
                     ATU Programming
                 </p>
                 <p
                     className={`text-base font-bold leading-5 sm:text-lg ${
-                        light ? 'text-white' : 'text-[#173563]'
+                        light ? 'text-white' : 'text-[#173563] dark:text-[#eaf1ff]'
                     }`}
                 >
                     Code Arena
@@ -118,22 +119,22 @@ function ContestPreview({ locale }) {
                     </div>
                 </div>
 
-                <div className="rounded-2xl bg-white p-5 text-[#142d55] sm:p-6">
+                <div className="rounded-2xl bg-white dark:bg-[#142238] p-5 text-[#142d55] dark:text-[#e8eef9] sm:p-6">
                     <p className="text-xl font-black">{copy.title}</p>
                     <div className="mt-5 grid gap-3">
                         {copy.items.map(([icon, title, text]) => (
-                            <div key={title} className="flex items-center gap-3 rounded-xl border border-[#e6ecf5] p-3">
-                                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#edf3ff] text-[#355da8]">
+                            <div key={title} className="flex items-center gap-3 rounded-xl border border-[#e6ecf5] dark:border-[#2d405b] p-3">
+                                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#edf3ff] dark:bg-[#203858] text-[#355da8] dark:text-[#a9c7ff]">
                                     <ArenaIcon name={icon} />
                                 </span>
                                 <span className="min-w-0">
                                     <span className="block text-sm font-bold">{title}</span>
-                                    <span className="mt-0.5 block text-xs text-[#7184a0]">{text}</span>
+                                    <span className="mt-0.5 block text-xs text-[#7184a0] dark:text-[#aebfd6]">{text}</span>
                                 </span>
                             </div>
                         ))}
                     </div>
-                    <div className="mt-4 flex items-start gap-2 rounded-xl bg-[#e8f8f1] px-4 py-3 text-xs leading-5 text-[#176746]">
+                    <div className="mt-4 flex items-start gap-2 rounded-xl bg-[#e8f8f1] dark:bg-[#123b31] px-4 py-3 text-xs leading-5 text-[#176746] dark:text-[#86dfb4]">
                         <ArenaIcon name="check" className="mt-0.5 h-4 w-4 shrink-0" />
                         <span>{copy.note}</span>
                     </div>
@@ -149,13 +150,13 @@ export default function Welcome({ auth, canLogin, canRegister }) {
     const cabinetHref = isAuthenticated ? route('dashboard') : route('register');
     const copy = {
         ru: {
-            title: 'Турнир по программированию', format: 'Формат', stages: 'Этапы', rules: 'Правила', cabinet: 'Мой кабинет', login: 'Войти', participate: 'Участвовать', open: 'Регистрация открыта', headline: 'Код, который выводит', accent: 'в лидеры.', description: 'Университетский чемпионат АТУ по спортивному программированию. Решайте задачи, соревнуйтесь с сильнейшими и покажите свой уровень.', primary: isAuthenticated ? 'Перейти к задачам' : 'Стать участником', how: 'Как всё проходит', benefits: ['Для студентов АТУ', 'Участие бесплатно', 'Дипломы победителям'],
+            title: 'Турнир по программированию', format: 'Формат', stages: 'Этапы', rules: 'Правила', cabinet: 'Мой кабинет', login: 'Войти', participate: 'Участвовать', open: 'Площадка соревнований', headline: 'Код, который выводит', accent: 'в лидеры.', description: 'Университетский чемпионат АТУ по спортивному программированию. Решайте задачи, соревнуйтесь с сильнейшими и покажите свой уровень.', primary: isAuthenticated ? 'Перейти к задачам' : 'Стать участником', how: 'Как всё проходит', benefits: ['Для студентов АТУ', 'Участие бесплатно', 'Автоматическая проверка'], metrics: [['Задачи', 'условия и примеры'], ['Тесты', 'автоматическая проверка'], ['Посылки', 'вердикты и баллы'], ['Рейтинг', 'реальные результаты']],
         },
         kk: {
-            title: 'Бағдарламалау турнирі', format: 'Формат', stages: 'Кезеңдер', rules: 'Ережелер', cabinet: 'Менің кабинетім', login: 'Кіру', participate: 'Қатысу', open: 'Тіркелу ашық', headline: 'Көшбасшылыққа жеткізетін', accent: 'код.', description: 'Спорттық бағдарламалау бойынша АТУ университеттік чемпионаты. Есептерді шешіп, үздіктермен жарысып, өз деңгейіңізді көрсетіңіз.', primary: isAuthenticated ? 'Есептерге өту' : 'Қатысушы болу', how: 'Қалай өтеді', benefits: ['АТУ студенттері үшін', 'Қатысу тегін', 'Жеңімпаздарға диплом'],
+            title: 'Бағдарламалау турнирі', format: 'Формат', stages: 'Кезеңдер', rules: 'Ережелер', cabinet: 'Менің кабинетім', login: 'Кіру', participate: 'Қатысу', open: 'Жарыс алаңы', headline: 'Көшбасшылыққа жеткізетін', accent: 'код.', description: 'Спорттық бағдарламалау бойынша АТУ университеттік чемпионаты. Есептерді шешіп, үздіктермен жарысып, өз деңгейіңізді көрсетіңіз.', primary: isAuthenticated ? 'Есептерге өту' : 'Қатысушы болу', how: 'Қалай өтеді', benefits: ['АТУ студенттері үшін', 'Қатысу тегін', 'Автоматты тексеру'], metrics: [['Есептер', 'шарттар мен мысалдар'], ['Тесттер', 'автоматты тексеру'], ['Жіберілімдер', 'нәтижелер мен ұпайлар'], ['Рейтинг', 'нақты нәтижелер']],
         },
         en: {
-            title: 'Programming tournament', format: 'Format', stages: 'Stages', rules: 'Rules', cabinet: 'My dashboard', login: 'Sign in', participate: 'Participate', open: 'Registration is open', headline: 'Code your way', accent: 'to the top.', description: 'ATU university competitive programming championship. Solve problems, compete with the best, and prove your skills.', primary: isAuthenticated ? 'Go to problems' : 'Become a participant', how: 'How it works', benefits: ['For ATU students', 'Free participation', 'Winner certificates'],
+            title: 'Programming tournament', format: 'Format', stages: 'Stages', rules: 'Rules', cabinet: 'My dashboard', login: 'Sign in', participate: 'Participate', open: 'Competition platform', headline: 'Code your way', accent: 'to the top.', description: 'ATU university competitive programming championship. Solve problems, compete with the best, and prove your skills.', primary: isAuthenticated ? 'Go to problems' : 'Become a participant', how: 'How it works', benefits: ['For ATU students', 'Free participation', 'Automatic judging'], metrics: [['Problems', 'statements and examples'], ['Tests', 'automatic judging'], ['Submissions', 'verdicts and scores'], ['Ranking', 'real results']],
         },
     }[locale];
 
@@ -163,7 +164,7 @@ export default function Welcome({ auth, canLogin, canRegister }) {
         <>
             <Head title={copy.title} />
 
-            <main className="min-h-screen overflow-x-hidden bg-white text-[#142d55]">
+            <main className="min-h-screen overflow-x-hidden bg-white dark:bg-[#142238] text-[#142d55] dark:text-[#e8eef9]">
                 <section className="relative max-w-full overflow-hidden bg-[#193f7d] text-white">
                     <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] [background-size:48px_48px]" />
                     <div className="absolute -right-24 top-20 h-80 w-80 rounded-full border-[64px] border-[#ffd83d]/10" />
@@ -180,6 +181,7 @@ export default function Welcome({ auth, canLogin, canRegister }) {
                             </nav>
 
                             <div className="flex items-center gap-2">
+                                <ThemeToggle onDarkSurface />
                                 <LocaleSwitcher dark compact />
                                 {isAuthenticated ? (
                                     <Link href={route('dashboard')} className={primaryButton}>
@@ -248,17 +250,12 @@ export default function Welcome({ auth, canLogin, canRegister }) {
                     </div>
                 </section>
 
-                <section className="border-b border-[#e3eaf5] bg-[#f7f9fd]">
-                    <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-[#e3eaf5] sm:grid-cols-4">
-                        {[
-                            ['4 часа', 'длительность тура'],
-                            ['8 задач', 'разного уровня'],
-                            ['3 языка', 'C++, Java, Python'],
-                            ['1 победитель', 'главный кубок'],
-                        ].map(([value, label]) => (
-                            <div key={label} className="bg-[#f7f9fd] px-5 py-7 text-center">
-                                <p className="text-2xl font-black tracking-tight text-[#234d8f]">{value}</p>
-                                <p className="mt-1 text-xs font-medium text-[#7184a0]">{label}</p>
+                <section className="border-b border-[#e3eaf5] dark:border-[#2d405b] bg-[#f7f9fd] dark:bg-[#17263e]">
+                    <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-[#e3eaf5] dark:bg-[#243a58] sm:grid-cols-4">
+                        {copy.metrics.map(([value, label]) => (
+                            <div key={label} className="bg-[#f7f9fd] dark:bg-[#17263e] px-5 py-7 text-center">
+                                <p className="text-2xl font-black tracking-tight text-[#234d8f] dark:text-[#a9c7ff]">{value}</p>
+                                <p className="mt-1 text-xs font-medium text-[#7184a0] dark:text-[#aebfd6]">{label}</p>
                             </div>
                         ))}
                     </div>
@@ -266,33 +263,33 @@ export default function Welcome({ auth, canLogin, canRegister }) {
 
                 <section id="format" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
                     <div className="max-w-2xl">
-                        <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#355da8]">Формат соревнования</p>
-                        <h2 className="mt-3 text-3xl font-black tracking-tight text-[#142d55] sm:text-4xl">Всё как на настоящей арене</h2>
-                        <p className="mt-4 text-base leading-7 text-[#667892]">Одна площадка для условий, отправки решений и актуального рейтинга участников.</p>
+                        <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#355da8] dark:text-[#a9c7ff]">Формат соревнования</p>
+                        <h2 className="mt-3 text-3xl font-black tracking-tight text-[#142d55] dark:text-[#e8eef9] sm:text-4xl">Всё как на настоящей арене</h2>
+                        <p className="mt-4 text-base leading-7 text-[#667892] dark:text-[#aebfd6]">Одна площадка для условий, отправки решений и актуального рейтинга участников.</p>
                     </div>
 
                     <div className="mt-10 grid gap-5 lg:grid-cols-3">
                         {formats.map((item) => (
-                            <article key={item.step} className="group rounded-2xl border border-[#dfe7f3] bg-white p-6 transition hover:-translate-y-1 hover:border-[#b8c9e4] hover:shadow-xl hover:shadow-[#244b88]/10">
+                            <article key={item.step} className="group rounded-2xl border border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238] p-6 transition hover:-translate-y-1 hover:border-[#b8c9e4] dark:hover:border-[#516e95] hover:shadow-xl hover:shadow-[#244b88]/10">
                                 <div className="flex items-center justify-between">
-                                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf3ff] text-[#355da8] transition group-hover:bg-[#355da8] group-hover:text-white">
+                                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf3ff] dark:bg-[#203858] text-[#355da8] dark:text-[#a9c7ff] transition group-hover:bg-[#355da8] group-hover:text-white">
                                         <ArenaIcon name={item.icon} className="h-6 w-6" />
                                     </span>
-                                    <span className="font-mono text-sm font-bold text-[#b0bdd0]">/{item.step}</span>
+                                    <span className="font-mono text-sm font-bold text-[#b0bdd0] dark:text-[#b6c6da]">/{item.step}</span>
                                 </div>
-                                <h3 className="mt-8 text-xl font-bold text-[#142d55]">{item.title}</h3>
-                                <p className="mt-3 text-sm leading-6 text-[#667892]">{item.text}</p>
+                                <h3 className="mt-8 text-xl font-bold text-[#142d55] dark:text-[#e8eef9]">{item.title}</h3>
+                                <p className="mt-3 text-sm leading-6 text-[#667892] dark:text-[#aebfd6]">{item.text}</p>
                             </article>
                         ))}
                     </div>
                 </section>
 
-                <section id="stages" className="bg-[#f3f6fb] py-20 lg:py-28">
+                <section id="stages" className="bg-[#f3f6fb] dark:bg-[#0c1628] py-20 lg:py-28">
                     <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
                         <div>
-                            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#355da8]">Путь участника</p>
-                            <h2 className="mt-3 text-3xl font-black tracking-tight text-[#142d55] sm:text-4xl">От регистрации до пьедестала</h2>
-                            <p className="mt-4 max-w-md text-base leading-7 text-[#667892]">Мы собрали весь процесс в понятные этапы. Следите за статусом в личном кабинете.</p>
+                            <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#355da8] dark:text-[#a9c7ff]">Путь участника</p>
+                            <h2 className="mt-3 text-3xl font-black tracking-tight text-[#142d55] dark:text-[#e8eef9] sm:text-4xl">От регистрации до пьедестала</h2>
+                            <p className="mt-4 max-w-md text-base leading-7 text-[#667892] dark:text-[#aebfd6]">Мы собрали весь процесс в понятные этапы. Следите за статусом в личном кабинете.</p>
                             <div id="rules" className="mt-8 rounded-2xl bg-[#193f7d] p-6 text-white">
                                 <div className="flex items-center gap-3 text-[#ffd83d]">
                                     <ArenaIcon name="shield" className="h-6 w-6" />
@@ -304,13 +301,13 @@ export default function Welcome({ auth, canLogin, canRegister }) {
 
                         <ol className="grid gap-4">
                             {timeline.map(([title, text], index) => (
-                                <li key={title} className="flex gap-4 rounded-2xl border border-[#dfe7f3] bg-white p-5 sm:items-center">
-                                    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl font-mono text-sm font-bold ${index === 0 ? 'bg-[#ffd83d] text-[#10264f]' : 'bg-[#edf3ff] text-[#355da8]'}`}>
+                                <li key={title} className="flex gap-4 rounded-2xl border border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238] p-5 sm:items-center">
+                                    <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl font-mono text-sm font-bold ${index === 0 ? 'bg-[#ffd83d] text-[#10264f]' : 'bg-[#edf3ff] dark:bg-[#203858] text-[#355da8] dark:text-[#a9c7ff]'}`}>
                                         {String(index + 1).padStart(2, '0')}
                                     </span>
                                     <div>
-                                        <h3 className="font-bold text-[#142d55]">{title}</h3>
-                                        <p className="mt-1 text-sm leading-6 text-[#667892]">{text}</p>
+                                        <h3 className="font-bold text-[#142d55] dark:text-[#e8eef9]">{title}</h3>
+                                        <p className="mt-1 text-sm leading-6 text-[#667892] dark:text-[#aebfd6]">{text}</p>
                                     </div>
                                 </li>
                             ))}
@@ -318,7 +315,7 @@ export default function Welcome({ auth, canLogin, canRegister }) {
                     </div>
                 </section>
 
-                <section className="bg-white py-20">
+                <section className="bg-white dark:bg-[#142238] py-20">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="relative overflow-hidden rounded-[2rem] bg-[#193f7d] px-6 py-12 text-center text-white sm:px-12">
                             <div className="absolute inset-0 opacity-[0.08] [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)] [background-size:22px_22px]" />
@@ -337,10 +334,10 @@ export default function Welcome({ auth, canLogin, canRegister }) {
                     </div>
                 </section>
 
-                <footer className="border-t border-[#e3eaf5] bg-white">
+                <footer className="border-t border-[#e3eaf5] dark:border-[#2d405b] bg-white dark:bg-[#142238]">
                     <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
                         <Brand />
-                        <p className="text-sm text-[#7184a0]">© 2026 Алматинский технологический университет</p>
+                        <p className="text-sm text-[#7184a0] dark:text-[#aebfd6]">© 2026 Алматинский технологический университет</p>
                     </div>
                 </footer>
             </main>

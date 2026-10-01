@@ -33,11 +33,11 @@ export default function Register() {
             <Head title={copy.title} />
 
             <div className="mb-7">
-                <span className="inline-flex rounded-lg bg-[#fff7d7] px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8a6810]">
+                <span className="inline-flex rounded-lg bg-[#fff7d7] dark:bg-[#42351b] px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8a6810] dark:text-[#f7d77b]">
                     {copy.badge}
                 </span>
-                <h2 className="mt-4 text-3xl font-black tracking-tight text-[#142d55]">{copy.heading}</h2>
-                <p className="mt-2 text-sm leading-6 text-[#7184a0]">
+                <h2 className="mt-4 text-3xl font-black tracking-tight text-[#142d55] dark:text-[#e8eef9]">{copy.heading}</h2>
+                <p className="mt-2 text-sm leading-6 text-[#7184a0] dark:text-[#aebfd6]">
                     {copy.description}
                 </p>
             </div>
@@ -109,7 +109,7 @@ export default function Register() {
                     </div>
                 </div>
 
-                <p className="text-xs leading-5 text-[#8795a9]">
+                <p className="text-xs leading-5 text-[#8795a9] dark:text-[#a4b6cf]">
                     {copy.rules}
                 </p>
 
@@ -118,9 +118,9 @@ export default function Register() {
                 </PrimaryButton>
             </form>
 
-            <p className="mt-6 text-center text-sm text-[#7184a0]">
+            <p className="mt-6 text-center text-sm text-[#7184a0] dark:text-[#aebfd6]">
                 {copy.existing}{' '}
-                <Link href={route('login')} className="font-bold text-[#355da8] hover:text-[#23457e]">
+                <Link href={route('login')} className="font-bold text-[#355da8] dark:text-[#a9c7ff] hover:text-[#23457e]">
                     {copy.login}
                 </Link>
             </p>

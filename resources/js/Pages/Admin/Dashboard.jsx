@@ -50,13 +50,13 @@ const setupSteps = [
 
 function StatCard({ icon, label, value }) {
     return (
-        <article className="rounded-2xl border border-[#dfe7f3] bg-white p-5">
+        <article className="rounded-2xl border border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238] p-5">
             <div className="flex items-center justify-between gap-4">
                 <div>
-                    <p className="text-xs font-semibold text-[#8795a9]">{label}</p>
-                    <p className="mt-2 text-3xl font-black tracking-tight text-[#142d55]">{value}</p>
+                    <p className="text-xs font-semibold text-[#8795a9] dark:text-[#a4b6cf]">{label}</p>
+                    <p className="mt-2 text-3xl font-black tracking-tight text-[#142d55] dark:text-[#e8eef9]">{value}</p>
                 </div>
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#edf3ff] text-[#355da8]">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#edf3ff] dark:bg-[#203858] text-[#355da8] dark:text-[#a9c7ff]">
                     <ArenaIcon name={icon} />
                 </span>
             </div>
@@ -102,28 +102,28 @@ export default function Dashboard({ stats }) {
 
                 <div className="mt-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#355da8]">Архитектура системы</p>
-                        <h2 className="mt-2 text-2xl font-black tracking-tight text-[#142d55]">Модули администратора</h2>
+                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#355da8] dark:text-[#a9c7ff]">Архитектура системы</p>
+                        <h2 className="mt-2 text-2xl font-black tracking-tight text-[#142d55] dark:text-[#e8eef9]">Модули администратора</h2>
                     </div>
-                    <span className="w-fit rounded-full bg-[#e8f8f1] px-3 py-1.5 text-xs font-bold text-[#16845a]">Соревнования и задачи работают</span>
+                    <span className="w-fit rounded-full bg-[#e8f8f1] dark:bg-[#123b31] px-3 py-1.5 text-xs font-bold text-[#16845a] dark:text-[#86dfb4]">Соревнования и задачи работают</span>
                 </div>
 
                 <section className="mt-5 grid gap-5 md:grid-cols-2">
                     {modules.map((module) => (
-                        <article id={module.id} key={module.title} className="scroll-mt-24 rounded-2xl border border-[#dfe7f3] bg-white p-6">
+                        <article id={module.id} key={module.title} className="scroll-mt-24 rounded-2xl border border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238] p-6">
                             <div className="flex items-start justify-between gap-4">
-                                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf3ff] text-[#355da8]">
+                                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf3ff] dark:bg-[#203858] text-[#355da8] dark:text-[#a9c7ff]">
                                     <ArenaIcon name={module.icon} className="h-6 w-6" />
                                 </span>
-                                <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${module.ready ? 'bg-[#e8f8f1] text-[#16845a]' : 'bg-[#f1f4f8] text-[#8795a9]'}`}>
+                                <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${module.ready ? 'bg-[#e8f8f1] dark:bg-[#123b31] text-[#16845a] dark:text-[#86dfb4]' : 'bg-[#f1f4f8] dark:bg-[#17263e] text-[#8795a9] dark:text-[#a4b6cf]'}`}>
                                     {module.ready ? 'Работает' : 'Проектируется'}
                                 </span>
                             </div>
-                            <h3 className="mt-5 text-lg font-black text-[#142d55]">{module.title}</h3>
-                            <p className="mt-2 text-sm leading-6 text-[#667892]">{module.description}</p>
-                            <ul className="mt-5 grid gap-2 border-t border-[#edf1f7] pt-4">
+                            <h3 className="mt-5 text-lg font-black text-[#142d55] dark:text-[#e8eef9]">{module.title}</h3>
+                            <p className="mt-2 text-sm leading-6 text-[#667892] dark:text-[#aebfd6]">{module.description}</p>
+                            <ul className="mt-5 grid gap-2 border-t border-[#edf1f7] dark:border-[#2d405b] pt-4">
                                 {module.details.map((detail) => (
-                                    <li key={detail} className="flex items-center gap-2 text-xs text-[#7184a0]">
+                                    <li key={detail} className="flex items-center gap-2 text-xs text-[#7184a0] dark:text-[#aebfd6]">
                                         <span className="text-[#32a975]">✓</span>
                                         {detail}
                                     </li>
@@ -132,7 +132,7 @@ export default function Dashboard({ stats }) {
                             {module.routeName && (
                                 <Link
                                     href={route(module.routeName)}
-                                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#355da8] transition hover:text-[#23457e]"
+                                    className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#355da8] dark:text-[#a9c7ff] transition hover:text-[#23457e]"
                                 >
                                     Открыть раздел
                                     <ArenaIcon name="arrow" className="h-4 w-4" />
@@ -142,20 +142,20 @@ export default function Dashboard({ stats }) {
                     ))}
                 </section>
 
-                <section className="mt-8 rounded-2xl border border-[#dfe7f3] bg-white p-6 sm:p-8">
+                <section className="mt-8 rounded-2xl border border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238] p-6 sm:p-8">
                     <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
                         <div>
-                            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#355da8]">Рабочий процесс</p>
-                            <h2 className="mt-2 text-2xl font-black tracking-tight text-[#142d55]">Как будет запускаться турнир</h2>
-                            <p className="mt-3 text-sm leading-6 text-[#667892]">Порядок похож на Codeforces, но управление будет проще и адаптировано под соревнования АТУ.</p>
+                            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#355da8] dark:text-[#a9c7ff]">Рабочий процесс</p>
+                            <h2 className="mt-2 text-2xl font-black tracking-tight text-[#142d55] dark:text-[#e8eef9]">Как будет запускаться турнир</h2>
+                            <p className="mt-3 text-sm leading-6 text-[#667892] dark:text-[#aebfd6]">Порядок похож на Codeforces, но управление будет проще и адаптировано под соревнования АТУ.</p>
                         </div>
                         <ol className="grid gap-3">
                             {setupSteps.map(([title, description], index) => (
-                                <li key={title} className="flex gap-3 rounded-xl bg-[#f7f9fd] p-4">
+                                <li key={title} className="flex gap-3 rounded-xl bg-[#f7f9fd] dark:bg-[#17263e] p-4">
                                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#355da8] font-mono text-xs font-black text-white">{index + 1}</span>
                                     <div>
-                                        <p className="text-sm font-bold text-[#314765]">{title}</p>
-                                        <p className="mt-1 text-xs leading-5 text-[#7184a0]">{description}</p>
+                                        <p className="text-sm font-bold text-[#314765] dark:text-[#d2dff1]">{title}</p>
+                                        <p className="mt-1 text-xs leading-5 text-[#7184a0] dark:text-[#aebfd6]">{description}</p>
                                     </div>
                                 </li>
                             ))}

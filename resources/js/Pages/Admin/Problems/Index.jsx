@@ -5,13 +5,13 @@ import { useState } from 'react';
 
 function StatCard({ icon, label, value }) {
     return (
-        <article className="rounded-2xl border border-[#dfe7f3] bg-white p-5">
+        <article className="rounded-2xl border border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238] p-5">
             <div className="flex items-center justify-between gap-4">
                 <div>
-                    <p className="text-xs font-semibold text-[#8795a9]">{label}</p>
-                    <p className="mt-2 text-3xl font-black tracking-tight text-[#142d55]">{value}</p>
+                    <p className="text-xs font-semibold text-[#8795a9] dark:text-[#a4b6cf]">{label}</p>
+                    <p className="mt-2 text-3xl font-black tracking-tight text-[#142d55] dark:text-[#e8eef9]">{value}</p>
                 </div>
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#edf3ff] text-[#355da8]">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#edf3ff] dark:bg-[#203858] text-[#355da8] dark:text-[#a9c7ff]">
                     <ArenaIcon name={icon} />
                 </span>
             </div>
@@ -38,9 +38,9 @@ export default function Index({ problems, competitions, filters, stats }) {
             <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
                 <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
                     <div>
-                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#355da8]">Банк задач</p>
-                        <h1 className="mt-2 text-3xl font-black tracking-tight text-[#142d55]">Задачи</h1>
-                        <p className="mt-2 max-w-2xl text-sm leading-6 text-[#667892]">
+                        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#355da8] dark:text-[#a9c7ff]">Банк задач</p>
+                        <h1 className="mt-2 text-3xl font-black tracking-tight text-[#142d55] dark:text-[#e8eef9]">Задачи</h1>
+                        <p className="mt-2 max-w-2xl text-sm leading-6 text-[#667892] dark:text-[#aebfd6]">
                             Просматривайте условия, примеры и ограничения, редактируйте задачи каждого соревнования.
                         </p>
                     </div>
@@ -48,11 +48,11 @@ export default function Index({ problems, competitions, filters, stats }) {
                     {competitions.length > 0 && (
                         <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
                             <label className="block">
-                                <span className="text-[10px] font-black uppercase tracking-wider text-[#8795a9]">Добавить в соревнование</span>
+                                <span className="text-[10px] font-black uppercase tracking-wider text-[#8795a9] dark:text-[#a4b6cf]">Добавить в соревнование</span>
                                 <select
                                     value={createCompetition}
                                     onChange={(event) => setCreateCompetition(event.target.value)}
-                                    className="mt-1.5 block w-full min-w-60 rounded-xl border-[#ccd7e8] bg-white px-4 py-2.5 text-sm font-bold text-[#314765] shadow-sm focus:border-[#355da8] focus:ring-[#355da8]"
+                                    className="mt-1.5 block w-full min-w-60 rounded-xl border-[#ccd7e8] dark:border-[#3a506e] bg-white dark:bg-[#142238] px-4 py-2.5 text-sm font-bold text-[#314765] dark:text-[#d2dff1] shadow-sm focus:border-[#355da8] dark:focus:border-[#91b8ff] focus:ring-[#355da8] dark:focus:ring-[#91b8ff]"
                                 >
                                     {competitions.map((competition) => (
                                         <option key={competition.id} value={competition.id}>{competition.title}</option>
@@ -76,18 +76,18 @@ export default function Index({ problems, competitions, filters, stats }) {
                     <StatCard icon="trophy" label="Соревнований с задачами" value={stats.competitions} />
                 </section>
 
-                <section className="mt-7 rounded-2xl border border-[#dfe7f3] bg-white">
-                    <div className="flex flex-col gap-4 border-b border-[#e8edf5] p-5 sm:flex-row sm:items-center sm:justify-between">
+                <section className="mt-7 rounded-2xl border border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238]">
+                    <div className="flex flex-col gap-4 border-b border-[#e8edf5] dark:border-[#2d405b] p-5 sm:flex-row sm:items-center sm:justify-between">
                         <div>
-                            <h2 className="text-lg font-black text-[#142d55]">Список задач</h2>
-                            <p className="mt-1 text-xs text-[#8795a9]">Показано: {problems.data.length} из {problems.total}</p>
+                            <h2 className="text-lg font-black text-[#142d55] dark:text-[#e8eef9]">Список задач</h2>
+                            <p className="mt-1 text-xs text-[#8795a9] dark:text-[#a4b6cf]">Показано: {problems.data.length} из {problems.total}</p>
                         </div>
                         <label className="block">
                             <span className="sr-only">Фильтр по соревнованию</span>
                             <select
                                 value={filters.competition ?? ''}
                                 onChange={(event) => filterByCompetition(event.target.value)}
-                                className="block w-full min-w-64 rounded-xl border-[#ccd7e8] bg-white px-4 py-2.5 text-sm font-semibold text-[#314765] focus:border-[#355da8] focus:ring-[#355da8]"
+                                className="block w-full min-w-64 rounded-xl border-[#ccd7e8] dark:border-[#3a506e] bg-white dark:bg-[#142238] px-4 py-2.5 text-sm font-semibold text-[#314765] dark:text-[#d2dff1] focus:border-[#355da8] dark:focus:border-[#91b8ff] focus:ring-[#355da8] dark:focus:ring-[#91b8ff]"
                             >
                                 <option value="">Все соревнования</option>
                                 {competitions.map((competition) => (
@@ -101,11 +101,11 @@ export default function Index({ problems, competitions, filters, stats }) {
 
                     {problems.data.length === 0 ? (
                         <div className="px-6 py-14 text-center">
-                            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#edf3ff] text-[#355da8]">
+                            <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#edf3ff] dark:bg-[#203858] text-[#355da8] dark:text-[#a9c7ff]">
                                 <ArenaIcon name="code" className="h-7 w-7" />
                             </span>
-                            <h3 className="mt-5 text-lg font-black text-[#142d55]">Задачи не найдены</h3>
-                            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#7184a0]">
+                            <h3 className="mt-5 text-lg font-black text-[#142d55] dark:text-[#e8eef9]">Задачи не найдены</h3>
+                            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-[#7184a0] dark:text-[#aebfd6]">
                                 {competitions.length === 0
                                     ? 'Сначала создайте соревнование, затем добавьте в него задачи.'
                                     : 'Добавьте первую задачу или выберите другое соревнование в фильтре.'}
@@ -122,34 +122,34 @@ export default function Index({ problems, competitions, filters, stats }) {
                                 <article key={problem.id} className="grid gap-4 p-5 lg:grid-cols-[64px_minmax(0,1fr)_repeat(4,100px)_180px] lg:items-center">
                                     <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#355da8] font-mono text-sm font-black text-white">{problem.code}</span>
                                     <div className="min-w-0">
-                                        <Link href={route('admin.competitions.problems.show', [problem.competition_id, problem.id])} className="block truncate text-sm font-black text-[#253b58] transition hover:text-[#355da8]">
+                                        <Link href={route('admin.competitions.problems.show', [problem.competition_id, problem.id])} className="block truncate text-sm font-black text-[#253b58] dark:text-[#d5e1f1] transition hover:text-[#355da8] dark:hover:text-[#a9c7ff]">
                                             {problem.title}
                                         </Link>
-                                        <Link href={route('admin.competitions.show', problem.competition_id)} className="mt-1 block truncate text-xs font-semibold text-[#7184a0] hover:text-[#355da8]">
+                                        <Link href={route('admin.competitions.show', problem.competition_id)} className="mt-1 block truncate text-xs font-semibold text-[#7184a0] dark:text-[#aebfd6] hover:text-[#355da8] dark:hover:text-[#a9c7ff]">
                                             {problem.competition_title}
                                         </Link>
                                     </div>
                                     <div className="text-xs lg:text-center">
-                                        <span className="text-[#8795a9] lg:hidden">Время: </span>
-                                        <span className="font-bold text-[#405674]">{problem.time_limit_ms} мс</span>
+                                        <span className="text-[#8795a9] dark:text-[#a4b6cf] lg:hidden">Время: </span>
+                                        <span className="font-bold text-[#405674] dark:text-[#b9cbe3]">{problem.time_limit_ms} мс</span>
                                     </div>
                                     <div className="text-xs lg:text-center">
-                                        <span className="text-[#8795a9] lg:hidden">Память: </span>
-                                        <span className="font-bold text-[#405674]">{problem.memory_limit_mb} МБ</span>
+                                        <span className="text-[#8795a9] dark:text-[#a4b6cf] lg:hidden">Память: </span>
+                                        <span className="font-bold text-[#405674] dark:text-[#b9cbe3]">{problem.memory_limit_mb} МБ</span>
                                     </div>
                                     <div className="text-xs lg:text-center">
-                                        <span className="text-[#8795a9] lg:hidden">Баллы: </span>
-                                        <span className="font-black text-[#355da8]">{problem.score}</span>
+                                        <span className="text-[#8795a9] dark:text-[#a4b6cf] lg:hidden">Баллы: </span>
+                                        <span className="font-black text-[#355da8] dark:text-[#a9c7ff]">{problem.score}</span>
                                     </div>
                                     <div className="text-xs lg:text-center">
-                                        <span className="text-[#8795a9] lg:hidden">Примеры: </span>
-                                        <span className={`inline-flex rounded-full px-2.5 py-1 font-black ${problem.samples_count > 0 ? 'bg-[#e8f8f1] text-[#16845a]' : 'bg-[#fff2f2] text-[#b64b55]'}`}>
+                                        <span className="text-[#8795a9] dark:text-[#a4b6cf] lg:hidden">Примеры: </span>
+                                        <span className={`inline-flex rounded-full px-2.5 py-1 font-black ${problem.samples_count > 0 ? 'bg-[#e8f8f1] dark:bg-[#123b31] text-[#16845a] dark:text-[#86dfb4]' : 'bg-[#fff2f2] dark:bg-[#40252e] text-[#b64b55] dark:text-[#ffaab3]'}`}>
                                             {problem.samples_count}
                                         </span>
                                     </div>
                                     <div className="flex flex-wrap gap-2 lg:justify-end">
-                                        <Link href={route('admin.competitions.problems.show', [problem.competition_id, problem.id])} className="rounded-lg bg-[#edf3ff] px-3 py-2 text-xs font-black text-[#355da8] hover:bg-[#dfe9fa]">Просмотр</Link>
-                                        <Link href={route('admin.competitions.problems.edit', [problem.competition_id, problem.id])} className="rounded-lg border border-[#d5deeb] px-3 py-2 text-xs font-black text-[#667892] hover:bg-[#f3f6fb]">Изменить</Link>
+                                        <Link href={route('admin.competitions.problems.show', [problem.competition_id, problem.id])} className="rounded-lg bg-[#edf3ff] dark:bg-[#203858] px-3 py-2 text-xs font-black text-[#355da8] dark:text-[#a9c7ff] hover:bg-[#dfe9fa] dark:hover:bg-[#254368]">Просмотр</Link>
+                                        <Link href={route('admin.competitions.problems.edit', [problem.competition_id, problem.id])} className="rounded-lg border border-[#d5deeb] dark:border-[#314763] px-3 py-2 text-xs font-black text-[#667892] dark:text-[#aebfd6] hover:bg-[#f3f6fb] dark:hover:bg-[#0c1628]">Изменить</Link>
                                     </div>
                                 </article>
                             ))}
@@ -161,9 +161,9 @@ export default function Index({ problems, competitions, filters, stats }) {
                     <nav className="mt-7 flex flex-wrap justify-center gap-2" aria-label="Страницы задач">
                         {problems.links.map((link) => (
                             link.url ? (
-                                <Link key={link.label} href={link.url} preserveScroll className={`rounded-lg border px-3 py-2 text-xs font-bold transition ${link.active ? 'border-[#355da8] bg-[#355da8] text-white' : 'border-[#dfe7f3] bg-white text-[#667892] hover:border-[#b8c9e4]'}`} dangerouslySetInnerHTML={{ __html: link.label }} />
+                                <Link key={link.label} href={link.url} preserveScroll className={`rounded-lg border px-3 py-2 text-xs font-bold transition ${link.active ? 'border-[#355da8] dark:border-[#91b8ff] bg-[#355da8] text-white' : 'border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238] text-[#667892] dark:text-[#aebfd6] hover:border-[#b8c9e4] dark:hover:border-[#516e95]'}`} dangerouslySetInnerHTML={{ __html: link.label }} />
                             ) : (
-                                <span key={link.label} className="rounded-lg border border-[#e6ebf3] bg-[#f7f9fc] px-3 py-2 text-xs font-bold text-[#b0bac8]" dangerouslySetInnerHTML={{ __html: link.label }} />
+                                <span key={link.label} className="rounded-lg border border-[#e6ebf3] dark:border-[#2d405b] bg-[#f7f9fc] dark:bg-[#17263e] px-3 py-2 text-xs font-bold text-[#b0bac8] dark:text-[#b6c6da]" dangerouslySetInnerHTML={{ __html: link.label }} />
                             )
                         ))}
                     </nav>

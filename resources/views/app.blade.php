@@ -6,6 +6,17 @@
 
         <title inertia>{{ config('app.name', 'ATU Code Arena') }}</title>
 
+        <script>
+            try {
+                const theme = localStorage.getItem('atu-color-theme');
+                const dark = theme !== 'light';
+                document.documentElement.classList.toggle('dark', dark);
+                document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+            } catch {
+                document.documentElement.classList.add('dark');
+                document.documentElement.style.colorScheme = 'dark';
+            }
+        </script>
         <meta name="theme-color" content="#193f7d">
         <meta name="description" content="{{ match (app()->getLocale()) {
             'kk' => 'ATU Code Arena — Алматы технологиялық университетінің бағдарламалау жарыстары платформасы.',

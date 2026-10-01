@@ -33,11 +33,11 @@ export default function Login({ status, canResetPassword }) {
             <Head title={copy.title} />
 
             <div className="mb-7">
-                <span className="inline-flex rounded-lg bg-[#edf3ff] px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#355da8]">
+                <span className="inline-flex rounded-lg bg-[#edf3ff] dark:bg-[#203858] px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#355da8] dark:text-[#a9c7ff]">
                     {copy.badge}
                 </span>
-                <h2 className="mt-4 text-3xl font-black tracking-tight text-[#142d55]">{copy.heading}</h2>
-                <p className="mt-2 text-sm leading-6 text-[#7184a0]">
+                <h2 className="mt-4 text-3xl font-black tracking-tight text-[#142d55] dark:text-[#e8eef9]">{copy.heading}</h2>
+                <p className="mt-2 text-sm leading-6 text-[#7184a0] dark:text-[#aebfd6]">
                     {copy.description}
                 </p>
             </div>
@@ -70,7 +70,7 @@ export default function Login({ status, canResetPassword }) {
                     <div className="flex items-center justify-between gap-3">
                         <InputLabel htmlFor="password" value={copy.password} />
                         {canResetPassword && (
-                            <Link href={route('password.request')} className="text-xs font-semibold text-[#355da8] transition hover:text-[#23457e]">
+                            <Link href={route('password.request')} className="text-xs font-semibold text-[#355da8] dark:text-[#a9c7ff] transition hover:text-[#23457e]">
                                 {copy.forgot}
                             </Link>
                         )}
@@ -89,7 +89,7 @@ export default function Login({ status, canResetPassword }) {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <label className="flex items-center gap-2 text-sm text-[#667892]">
+                <label className="flex items-center gap-2 text-sm text-[#667892] dark:text-[#aebfd6]">
                     <Checkbox
                         name="remember"
                         checked={data.remember}
@@ -103,9 +103,9 @@ export default function Login({ status, canResetPassword }) {
                 </PrimaryButton>
             </form>
 
-            <p className="mt-6 text-center text-sm text-[#7184a0]">
+            <p className="mt-6 text-center text-sm text-[#7184a0] dark:text-[#aebfd6]">
                 {copy.noAccount}{' '}
-                <Link href={route('register')} className="font-bold text-[#355da8] hover:text-[#23457e]">
+                <Link href={route('register')} className="font-bold text-[#355da8] dark:text-[#a9c7ff] hover:text-[#23457e]">
                     {copy.register}
                 </Link>
             </p>

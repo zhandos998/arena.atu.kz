@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 
 function StatCard({ icon, label, value, helper, accent = false }) {
     return (
-        <article className={`rounded-2xl border p-5 ${accent ? 'border-[#355da8] bg-[#355da8] text-white' : 'border-[#dfe7f3] bg-white text-[#142d55]'}`}>
+        <article className={`rounded-2xl border p-5 ${accent ? 'border-[#355da8] dark:border-[#91b8ff] bg-[#355da8] text-white' : 'border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238] text-[#142d55] dark:text-[#e8eef9]'}`}>
             <div className="flex items-start justify-between gap-4">
-                <div><p className={`text-xs font-semibold ${accent ? 'text-white/60' : 'text-[#8795a9]'}`}>{label}</p><p className="mt-2 text-3xl font-black tracking-tight">{value}</p><p className={`mt-1 text-xs ${accent ? 'text-white/65' : 'text-[#7184a0]'}`}>{helper}</p></div>
-                <span className={`flex h-10 w-10 items-center justify-center rounded-xl ${accent ? 'bg-white/10 text-[#ffd83d]' : 'bg-[#edf3ff] text-[#355da8]'}`}><ArenaIcon name={icon} /></span>
+                <div><p className={`text-xs font-semibold ${accent ? 'text-white/60' : 'text-[#8795a9] dark:text-[#a4b6cf]'}`}>{label}</p><p className="mt-2 text-3xl font-black tracking-tight">{value}</p><p className={`mt-1 text-xs ${accent ? 'text-white/65' : 'text-[#7184a0] dark:text-[#aebfd6]'}`}>{helper}</p></div>
+                <span className={`flex h-10 w-10 items-center justify-center rounded-xl ${accent ? 'bg-white/10 text-[#ffd83d]' : 'bg-[#edf3ff] dark:bg-[#203858] text-[#355da8] dark:text-[#a9c7ff]'}`}><ArenaIcon name={icon} /></span>
             </div>
         </article>
     );
@@ -39,22 +39,22 @@ function Countdown({ competition, copy }) {
 
 function TasksTable({ competition, tasks, stats, copy }) {
     return (
-        <section className="overflow-hidden rounded-2xl border border-[#dfe7f3] bg-white">
-            <div className="flex items-center justify-between gap-4 border-b border-[#e3eaf5] px-5 py-4 sm:px-6">
-                <div><h2 className="font-bold text-[#142d55]">{copy.roundProblems}</h2><p className="mt-1 text-xs text-[#8795a9]">{copy.solved} {stats.solved} / {competition.problems_count}</p></div>
-                <span className="rounded-full bg-[#fff7d7] px-3 py-1.5 text-xs font-bold text-[#8a6810]">{competition.title}</span>
+        <section className="overflow-hidden rounded-2xl border border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238]">
+            <div className="flex items-center justify-between gap-4 border-b border-[#e3eaf5] dark:border-[#2d405b] px-5 py-4 sm:px-6">
+                <div><h2 className="font-bold text-[#142d55] dark:text-[#e8eef9]">{copy.roundProblems}</h2><p className="mt-1 text-xs text-[#8795a9] dark:text-[#a4b6cf]">{copy.solved} {stats.solved} / {competition.problems_count}</p></div>
+                <span className="rounded-full bg-[#fff7d7] dark:bg-[#42351b] px-3 py-1.5 text-xs font-bold text-[#8a6810] dark:text-[#f7d77b]">{competition.title}</span>
             </div>
 
             {tasks.length === 0 ? (
-                <div className="px-6 py-10 text-center text-sm text-[#7184a0]">{competition.has_started ? copy.noProblems : copy.problemsAfterStart}</div>
+                <div className="px-6 py-10 text-center text-sm text-[#7184a0] dark:text-[#aebfd6]">{competition.has_started ? copy.noProblems : copy.problemsAfterStart}</div>
             ) : (
                 <div className="divide-y divide-[#edf1f7]">
                     {tasks.map((task) => (
-                        <Link key={task.id} href={route('competitions.problems.show', [competition.id, task.id])} className="flex w-full items-center gap-3 px-4 py-4 text-left transition hover:bg-[#f8fafd] sm:gap-4 sm:px-6">
-                            <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-black ${task.status === 'solved' ? 'bg-[#e8f8f1] text-[#16845a]' : task.status === 'attempted' ? 'bg-[#fff7d7] text-[#8a6810]' : 'bg-[#edf3ff] text-[#355da8]'}`}>{task.status === 'solved' ? '✓' : task.code}</span>
-                            <span className="min-w-0 flex-1"><span className="block truncate text-sm font-bold text-[#314765]">{task.title}</span><span className="mt-1 block text-xs text-[#8795a9]">{task.score} {copy.points} · {task.attempts} {copy.attempts}</span></span>
-                            <span className={`hidden rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider sm:inline-flex ${task.status === 'solved' ? 'bg-[#e8f8f1] text-[#16845a]' : task.status === 'attempted' ? 'bg-[#fff7d7] text-[#8a6810]' : 'bg-[#f1f4f8] text-[#8795a9]'}`}>{task.status === 'solved' ? copy.solvedStatus : task.status === 'attempted' ? copy.attemptedStatus : copy.openStatus}</span>
-                            <ArenaIcon name="arrow" className="h-4 w-4 text-[#a1afc1]" />
+                        <Link key={task.id} href={route('competitions.problems.show', [competition.id, task.id])} className="flex w-full items-center gap-3 px-4 py-4 text-left transition hover:bg-[#f8fafd] dark:hover:bg-[#111e31] sm:gap-4 sm:px-6">
+                            <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-black ${task.status === 'solved' ? 'bg-[#e8f8f1] dark:bg-[#123b31] text-[#16845a] dark:text-[#86dfb4]' : task.status === 'attempted' ? 'bg-[#fff7d7] dark:bg-[#42351b] text-[#8a6810] dark:text-[#f7d77b]' : 'bg-[#edf3ff] dark:bg-[#203858] text-[#355da8] dark:text-[#a9c7ff]'}`}>{task.status === 'solved' ? '✓' : task.code}</span>
+                            <span className="min-w-0 flex-1"><span className="block truncate text-sm font-bold text-[#314765] dark:text-[#d2dff1]">{task.title}</span><span className="mt-1 block text-xs text-[#8795a9] dark:text-[#a4b6cf]">{task.score} {copy.points} · {task.attempts} {copy.attempts}</span></span>
+                            <span className={`hidden rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider sm:inline-flex ${task.status === 'solved' ? 'bg-[#e8f8f1] dark:bg-[#123b31] text-[#16845a] dark:text-[#86dfb4]' : task.status === 'attempted' ? 'bg-[#fff7d7] dark:bg-[#42351b] text-[#8a6810] dark:text-[#f7d77b]' : 'bg-[#f1f4f8] dark:bg-[#17263e] text-[#8795a9] dark:text-[#a4b6cf]'}`}>{task.status === 'solved' ? copy.solvedStatus : task.status === 'attempted' ? copy.attemptedStatus : copy.openStatus}</span>
+                            <ArenaIcon name="arrow" className="h-4 w-4 text-[#a1afc1] dark:text-[#b6c6da]" />
                         </Link>
                     ))}
                 </div>
@@ -65,13 +65,13 @@ function TasksTable({ competition, tasks, stats, copy }) {
 
 function Leaderboard({ rows, copy }) {
     return (
-        <section className="overflow-hidden rounded-2xl border border-[#dfe7f3] bg-white">
-            <div className="flex items-center justify-between border-b border-[#e3eaf5] px-5 py-4"><div><h2 className="font-bold text-[#142d55]">{copy.rating}</h2><p className="mt-1 text-xs text-[#8795a9]">{copy.realResults}</p></div><ArenaIcon name="ranking" className="h-5 w-5 text-[#355da8]" /></div>
-            {rows.length === 0 ? <p className="px-5 py-8 text-center text-sm text-[#7184a0]">{copy.noResults}</p> : <div className="divide-y divide-[#edf1f7]">{rows.map((row) => (
-                <div key={row.user_id} className={`grid grid-cols-[30px_1fr_auto] items-center gap-3 px-5 py-3.5 ${row.is_current ? 'bg-[#edf3ff]' : ''}`}>
-                    <span className={`font-mono text-xs font-bold ${row.rank <= 3 ? 'text-[#b1830c]' : 'text-[#8795a9]'}`}>{row.rank}</span>
-                    <div className="min-w-0"><p className={`truncate text-sm font-bold ${row.is_current ? 'text-[#234d8f]' : 'text-[#314765]'}`}>{row.is_current ? copy.you : row.name}</p><p className="mt-0.5 text-[11px] text-[#8795a9]">{row.solved} {copy.problems} · {row.score} {copy.points}</p></div>
-                    <span className="font-mono text-xs font-semibold text-[#7184a0]">{row.penalty_minutes} {copy.minutes}</span>
+        <section className="overflow-hidden rounded-2xl border border-[#dfe7f3] dark:border-[#2d405b] bg-white dark:bg-[#142238]">
+            <div className="flex items-center justify-between border-b border-[#e3eaf5] dark:border-[#2d405b] px-5 py-4"><div><h2 className="font-bold text-[#142d55] dark:text-[#e8eef9]">{copy.rating}</h2><p className="mt-1 text-xs text-[#8795a9] dark:text-[#a4b6cf]">{copy.realResults}</p></div><ArenaIcon name="ranking" className="h-5 w-5 text-[#355da8] dark:text-[#a9c7ff]" /></div>
+            {rows.length === 0 ? <p className="px-5 py-8 text-center text-sm text-[#7184a0] dark:text-[#aebfd6]">{copy.noResults}</p> : <div className="divide-y divide-[#edf1f7]">{rows.map((row) => (
+                <div key={row.user_id} className={`grid grid-cols-[30px_1fr_auto] items-center gap-3 px-5 py-3.5 ${row.is_current ? 'bg-[#edf3ff] dark:bg-[#203858]' : ''}`}>
+                    <span className={`font-mono text-xs font-bold ${row.rank <= 3 ? 'text-[#b1830c] dark:text-[#f7d77b]' : 'text-[#8795a9] dark:text-[#a4b6cf]'}`}>{row.rank}</span>
+                    <div className="min-w-0"><p className={`truncate text-sm font-bold ${row.is_current ? 'text-[#234d8f] dark:text-[#a9c7ff]' : 'text-[#314765] dark:text-[#d2dff1]'}`}>{row.is_current ? copy.you : row.name}</p><p className="mt-0.5 text-[11px] text-[#8795a9] dark:text-[#a4b6cf]">{row.solved} {copy.problems} · {row.score} {copy.points}</p></div>
+                    <span className="font-mono text-xs font-semibold text-[#7184a0] dark:text-[#aebfd6]">{row.penalty_minutes} {copy.minutes}</span>
                 </div>
             ))}</div>}
         </section>
@@ -89,7 +89,7 @@ export default function Dashboard({ competition, tasks, leaderboard, stats }) {
     }[locale];
 
     if (!competition) {
-        return <AuthenticatedLayout><Head title={copy.title} /><div className="mx-auto max-w-4xl px-4 py-16 sm:px-6"><section className="rounded-3xl border border-dashed border-[#bdcbe0] bg-white px-6 py-16 text-center"><ArenaIcon name="trophy" className="mx-auto h-12 w-12 text-[#355da8]" /><h1 className="mt-5 text-2xl font-black text-[#142d55]">{copy.noCompetition}</h1><p className="mt-3 text-sm text-[#7184a0]">{copy.noCompetitionText}</p><Link href={route('competitions.index')} className="mt-6 inline-flex rounded-xl bg-[#355da8] px-5 py-3 text-sm font-black text-white">{copy.competitions}</Link></section></div></AuthenticatedLayout>;
+        return <AuthenticatedLayout><Head title={copy.title} /><div className="mx-auto max-w-4xl px-4 py-16 sm:px-6"><section className="rounded-3xl border border-dashed border-[#bdcbe0] dark:border-[#415a78] bg-white dark:bg-[#142238] px-6 py-16 text-center"><ArenaIcon name="trophy" className="mx-auto h-12 w-12 text-[#355da8] dark:text-[#a9c7ff]" /><h1 className="mt-5 text-2xl font-black text-[#142d55] dark:text-[#e8eef9]">{copy.noCompetition}</h1><p className="mt-3 text-sm text-[#7184a0] dark:text-[#aebfd6]">{copy.noCompetitionText}</p><Link href={route('competitions.index')} className="mt-6 inline-flex rounded-xl bg-[#355da8] px-5 py-3 text-sm font-black text-white">{copy.competitions}</Link></section></div></AuthenticatedLayout>;
     }
 
     const stateLabel = competition.has_ended ? copy.ended : competition.has_started ? copy.live : copy.upcoming;

@@ -1,6 +1,7 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import ArenaIcon from '@/Components/ArenaIcon';
 import LocaleSwitcher from '@/Components/LocaleSwitcher';
+import ThemeToggle from '@/Components/ThemeToggle';
 import { useTranslation } from '@/lib/i18n';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
@@ -127,7 +128,7 @@ export default function AdminLayout({ children, title = 'Панель админ
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <div className="min-h-screen bg-[#f3f6fb] text-[#142d55]">
+        <div className="min-h-screen bg-[#f3f6fb] dark:bg-[#0c1628] text-[#142d55] dark:text-[#e8eef9]">
             <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 lg:block">
                 <Sidebar user={user} />
             </aside>
@@ -147,12 +148,12 @@ export default function AdminLayout({ children, title = 'Панель админ
             )}
 
             <div className="lg:pl-72">
-                <header className="sticky top-0 z-30 border-b border-[#dfe7f3] bg-white/95 backdrop-blur">
+                <header className="sticky top-0 z-30 border-b border-[#dfe7f3] dark:border-[#2d405b] bg-white/95 dark:bg-[#142238]/95 backdrop-blur">
                     <div className="flex h-[72px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
                         <div className="flex min-w-0 items-center gap-3">
                             <button
                                 type="button"
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#dfe7f3] text-xl text-[#355da8] lg:hidden"
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#dfe7f3] dark:border-[#2d405b] text-xl text-[#355da8] dark:text-[#a9c7ff] lg:hidden"
                                 aria-label={t('Открыть меню')}
                                 aria-expanded={sidebarOpen}
                                 onClick={() => setSidebarOpen(true)}
@@ -160,14 +161,15 @@ export default function AdminLayout({ children, title = 'Панель админ
                                 ≡
                             </button>
                             <div className="min-w-0">
-                                <p className="truncate text-sm font-black text-[#173563] sm:text-base">{t(title)}</p>
-                                <p className="hidden text-xs text-[#8795a9] sm:block">{t(subtitle)}</p>
+                                <p className="truncate text-sm font-black text-[#173563] dark:text-[#eaf1ff] sm:text-base">{t(title)}</p>
+                                <p className="hidden text-xs text-[#8795a9] dark:text-[#a4b6cf] sm:block">{t(subtitle)}</p>
                             </div>
                         </div>
 
                         <div className="flex items-center gap-3">
                             <LocaleSwitcher compact />
-                            <span className="hidden items-center gap-2 rounded-full bg-[#e8f8f1] px-3 py-2 text-xs font-bold text-[#16845a] sm:flex">
+                            <ThemeToggle />
+                            <span className="hidden items-center gap-2 rounded-full bg-[#e8f8f1] dark:bg-[#123b31] px-3 py-2 text-xs font-bold text-[#16845a] dark:text-[#86dfb4] sm:flex">
                                 <span className="h-2 w-2 rounded-full bg-[#32b67a]" />
                                 {t('Система онлайн')}
                             </span>
