@@ -20,6 +20,7 @@ x-app-environment: &app-environment
   DB_QUEUE_RETRY_AFTER: 950
   JUDGE_WORKSPACE_PATH: /var/www/html/storage/app/judge
   JUDGE_DOCKER_WORKSPACE_PATH: ${JUDGE_DOCKER_WORKSPACE_PATH:-/opt/apps/arena/storage/app/judge}
+  JUDGE_CONTAINER_STARTUP_GRACE_SECONDS: ${JUDGE_CONTAINER_STARTUP_GRACE_SECONDS:-5}
 
 x-app-service: &app-service
   build:

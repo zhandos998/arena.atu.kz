@@ -66,6 +66,7 @@ XML);
     public function execute(CompilationResult $program, string $input, int $timeLimitMs, int $memoryLimitMb): ExecutionResult
     {
         $containerName = 'atu-judge-'.Str::lower(Str::random(16));
+        $executionTimeout = number_format(max(1, $timeLimitMs) / 1000, 3, '.', '');
         $process = new Process([
             'docker', 'run', '--rm', '-i', '--name', $containerName, '--network', 'none',
             '--memory', $memoryLimitMb.'m', '--memory-swap', $memoryLimitMb.'m', '--cpus', '1',
@@ -73,20 +74,37 @@ XML);
             '--tmpfs', '/tmp:rw,noexec,nosuid,size=64m', '--user', '65534:65534',
             '--mount', 'type=bind,source='.($program->dockerDirectory ?? $program->directory).',target=/workspace,readonly',
             '-w', '/workspace',
-            $program->image, ...$program->runCommand,
+            $program->image,
+            'sh', '-c', 'timeout -s KILL "$@"', '--', $executionTimeout, ...$program->runCommand,
         ]);
         $process->setInput($input);
-        $process->setTimeout(max(1, $timeLimitMs / 1000));
+        $process->setTimeout(
+            max(1, $timeLimitMs / 1000) + (int) config('judge.container_startup_grace_seconds'),
+        );
         $startedAt = hrtime(true);
 
         try {
             $process->run();
+            $executionTimeMs = min(
+                $timeLimitMs,
+                (int) ((hrtime(true) - $startedAt) / 1_000_000),
+            );
+
+            if ($process->getExitCode() === 137) {
+                return new ExecutionResult(
+                    124,
+                    Str::limit($process->getOutput(), 100000, ''),
+                    'Превышен лимит времени.',
+                    $timeLimitMs,
+                    true,
+                );
+            }
 
             return new ExecutionResult(
                 $process->getExitCode() ?? 1,
                 Str::limit($process->getOutput(), 100000, ''),
                 Str::limit($process->getErrorOutput(), 10000, ''),
-                (int) ((hrtime(true) - $startedAt) / 1_000_000),
+                $executionTimeMs,
                 false,
             );
         } catch (ProcessTimedOutException) {
